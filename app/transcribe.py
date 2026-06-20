@@ -1,24 +1,3 @@
-"""
-Core transcription logic.
-
-Steps:
-    1. normalize_audio(): use ffmpeg to convert any input format into a
-       standard 16kHz mono WAV. This solves "different audio formats" by
-       making everything downstream deal with a single consistent format,
-       instead of every consumer needing to handle WAV/MP3/M4A/FLAC differently.
-    2. chunk_audio(): for long files, split into fixed-length chunks (default
-       5 minutes) with a small overlap, so we avoid timeouts/memory blowups
-       and can process pieces independently (in parallel, if desired).
-    3. transcribe_chunk(): runs Whisper on a chunk and returns segments with
-       start/end timestamps.
-    4. transcribe_file(): orchestrates the above and offsets timestamps from
-       each chunk so the final segment list reflects time in the original file.
-
-Whisper is loaded lazily so importing this module doesn't require the model
-weights to be present (useful for testing other parts of the pipeline without
-a network connection / GPU).
-"""
-
 import math
 import subprocess
 import tempfile
