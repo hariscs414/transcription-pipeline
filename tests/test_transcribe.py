@@ -1,12 +1,3 @@
-"""
-Basic tests.
-
-We mock `transcribe_chunk` rather than downloading real Whisper weights,
-so these tests run fast and offline. They verify the parts we actually
-wrote: format normalization, chunking math, and timestamp offsetting -
-not Whisper's own accuracy, which is out of scope to test here.
-"""
-
 import subprocess
 import sys
 from pathlib import Path
