@@ -1,13 +1,3 @@
-"""
-Job tracking.
-
-For this assignment an in-memory dict stands in for a real database.
-In production this would be a Postgres table (see README: "How would
-you store audio and transcripts?") with columns mirroring the Job
-fields below, so status survives restarts and can be queried by
-multiple worker/API processes.
-"""
-
 from dataclasses import dataclass, field
 from enum import Enum
 from typing import Optional, List, Dict
