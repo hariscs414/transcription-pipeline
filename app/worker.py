@@ -1,20 +1,3 @@
-"""
-Worker / queue layer.
-
-For this assignment, jobs run on a background thread pool to keep the
-demo self-contained (no external broker required to try it out).
-
-In production this would be a real queue (Redis + RQ/Celery, or SQS),
-with one or more separate worker processes consuming it. That gives:
-  - true process isolation (a crashed worker doesn't take down the API)
-  - horizontal scaling (add more workers under load)
-  - durable retries (the queue still has the job if a worker dies mid-task)
-
-The retry policy here is intentionally simple: on failure, requeue up to
-`max_retries` times with no backoff. Production would add exponential
-backoff and a dead-letter queue for jobs that exhaust their retries.
-"""
-
 from concurrent.futures import ThreadPoolExecutor
 
 from app.jobs import JobStore, JobStatus
