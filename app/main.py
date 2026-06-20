@@ -1,19 +1,3 @@
-"""
-FastAPI service for the transcription pipeline.
-
-Endpoints:
-    POST /transcribe          -> upload an audio file, returns a job_id immediately
-    GET  /transcription/{id}  -> poll job status / get result when done
-    GET  /health              -> health check
-
-Design:
-    Upload and processing are decoupled. The upload endpoint only validates
-    the file, saves it to disk (storage.py), and enqueues a background job.
-    A worker (worker.py) consumes the queue and runs the actual transcription
-    (transcribe.py). This keeps the API responsive under concurrent uploads
-    and lets transcription scale independently (e.g. multiple worker processes).
-"""
-
 import uuid
 from pathlib import Path
 
